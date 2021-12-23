@@ -1,0 +1,5 @@
+homepage: "https://www.expertflow.com"
+documentation: "https://www.expertflow.com/chat/"
+versions:
+    - sha: cc066262b1d85015ec48edd7295218c99e0aae22
+    changeNotes: Initial release.
