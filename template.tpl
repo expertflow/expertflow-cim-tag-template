@@ -14,7 +14,11 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Expertflow Live Chat",
-  "categories" : ["CHAT","SOCIAL","SALES"],
+  "categories": [
+    "CHAT",
+    "SOCIAL",
+    "SALES"
+  ],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -30,19 +34,6 @@ ___INFO___
 ___TEMPLATE_PARAMETERS___
 
 [
-  {
-    "type": "TEXT",
-    "name": "initWidgetUrl",
-    "displayName": "Init-Widget Url",
-    "simpleValueType": true,
-    "alwaysInSummary": true,
-    "valueHint": "eg: https://example.com",
-    "valueValidators": [
-      {
-        "type": "NON_EMPTY"
-      }
-    ]
-  },
   {
     "type": "TEXT",
     "name": "customerWidgetUrl",
@@ -98,16 +89,15 @@ const injectScript = require('injectScript');
 
 var __cim = copyFromWindow('__cim') || {};
 
-__cim.initWidgetUrl = data.initWidgetUrl;
 __cim.customerWidgetUrl = data.customerWidgetUrl;
 __cim.widgetIdentifier = data.widgetIdentifier;
 __cim.serviceIdentifier = data.serviceIdentifier;
 
 setInWindow('__cim', __cim);
 
-const initUrl = __cim.initWidgetUrl+'/init_widget.js';
+const widgetUrl = __cim.customerWidgetUrl+'/widget-assets/widget/init_widget.js';
 
-injectScript(initUrl, data.gtmOnSuccess, data.gtmOnFailure, 'initUrl');
+injectScript(widgetUrl, data.gtmOnSuccess, data.gtmOnFailure, 'widgetUrl');
 
 // End CIM template script
 
@@ -190,7 +180,7 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
-                "string": "https://web-init-widget.web.app/init_widget.js"
+                "string": "https://cim.expertflow.com/customer-widget/widget-assets/widget/init_widget.js"
               }
             ]
           }
@@ -215,16 +205,15 @@ scenarios:
 
     var __cim = copyFromWindow('__cim') || {};
 
-    __cim.initWidgetUrl = 'https://web-init-widget.web.app';
     __cim.customerWidgetUrl = 'https://cim.expertflow.com/customer-widget';
     __cim.widgetIdentifier = 'web';
     __cim.serviceIdentifier = '+921218';
 
     setInWindow('__cim', __cim);
 - name: Script Injection Test
-  code: "const injectScript = require('injectScript');\n \nlet initWidgetUrl = 'https://web-init-widget.web.app';\n\
-    \nconst initUrl = initWidgetUrl+'/init_widget.js';\n\ninjectScript(initUrl, data.gtmOnSuccess,\
-    \ data.gtmOnFailure, 'initUrl');"
+  code: "const injectScript = require('injectScript');\n \nlet customerWidgetUrl =\
+    \ 'https://cim.expertflow.com/customer-widget';\n\nconst widgetUrl = customerWidgetUrl+'/widget-assets/widget/init_widget.js';\n\
+    \ninjectScript(widgetUrl, data.gtmOnSuccess, data.gtmOnFailure, 'widgetUrl');"
 
 
 ___NOTES___
